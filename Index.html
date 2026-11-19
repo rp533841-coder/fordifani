@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#fff7f4" />
+<title>A Little Birthday Letter — 11 April</title>
+<style>
+  :root{--ink:#443b3c;--muted:#8d7e80;--rose:#d98f98;--rose-dark:#bd707c;--paper:#fffdfb;--line:#f0dfe0;--shadow:0 22px 70px rgba(105,65,72,.12)}
+  *{box-sizing:border-box} body{margin:0;min-height:100vh;font-family:ui-rounded,"Segoe UI",system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at 15% 15%,#ffe8e8 0,transparent 28%),radial-gradient(circle at 90% 85%,#fce8d9 0,transparent 30%),#fff7f4;display:grid;place-items:center;padding:24px;overflow-x:hidden}
+  .sparkle{position:fixed;color:#e5aab0;opacity:.55;pointer-events:none;animation:float 7s ease-in-out infinite}.s1{top:9%;left:9%;font-size:25px}.s2{top:18%;right:12%;font-size:18px;animation-delay:1s}.s3{bottom:12%;left:14%;font-size:22px;animation-delay:2s}.s4{bottom:19%;right:9%;font-size:28px;animation-delay:3s}
+  @keyframes float{50%{transform:translateY(-13px) rotate(12deg)}}
+  .wrap{width:min(100%,650px);position:relative}.topline{text-align:center;margin-bottom:17px;color:var(--rose-dark);font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+  .card{background:rgba(255,253,251,.94);border:1px solid rgba(230,196,198,.7);border-radius:28px;padding:clamp(25px,6vw,52px);box-shadow:var(--shadow);position:relative;overflow:hidden;min-height:490px;display:flex;flex-direction:column}
+  .card:before{content:"";position:absolute;inset:10px;border:1px solid #f5e7e5;border-radius:21px;pointer-events:none}
+  .content{position:relative;z-index:1;display:flex;flex-direction:column;flex:1}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-dark);font-weight:700;margin:4px 0 18px}
+  h1{font-family:Georgia,serif;font-size:clamp(34px,7vw,52px);line-height:1.12;font-weight:500;margin:0 0 16px;color:#554447}
+  .message{font-family:Georgia,serif;font-size:clamp(23px,4.7vw,31px);line-height:1.45;margin:18px 0 16px;color:#554447}
+  .sub{font-size:15px;line-height:1.7;color:var(--muted);margin:0 0 22px}
+  .date{display:inline-flex;align-self:flex-start;align-items:center;gap:9px;border:1px solid var(--line);background:#fff8f7;border-radius:99px;padding:9px 15px;color:#9c6870;font-size:13px;margin:5px 0 25px}
+  .progress{height:4px;background:#f4e9e8;border-radius:9px;margin:0 0 28px;overflow:hidden}.bar{height:100%;width:0;background:linear-gradient(90deg,#e9aeb3,#c87c88);border-radius:9px;transition:width .35s ease}
+  label{font-size:13px;color:#8b777a;font-weight:650;margin:4px 0 9px}textarea{width:100%;min-height:105px;resize:vertical;border:1px solid #efdddd;border-radius:15px;background:#fffafa;padding:14px 15px;font:15px/1.6 inherit;color:var(--ink);outline:none;transition:border .2s,box-shadow .2s}textarea:focus{border-color:#d99aa2;box-shadow:0 0 0 3px #f8e9e9}textarea::placeholder{color:#c1afb1}
+  .actions{display:flex;gap:12px;justify-content:space-between;align-items:center;margin-top:24px;position:relative;z-index:1}.btn{border:0;border-radius:99px;padding:13px 22px;font-size:14px;font-weight:700;cursor:pointer;transition:transform .2s,background .2s}.btn:hover{transform:translateY(-2px)}.primary{background:var(--rose);color:white;box-shadow:0 7px 18px #d98f9840}.primary:hover{background:var(--rose-dark)}.secondary{background:transparent;color:#a17e83;padding-left:5px;padding-right:5px}.secondary:disabled{opacity:.25;cursor:default;transform:none}
+  .step{text-align:center;color:#b39da0;font-size:12px;margin-top:18px;letter-spacing:.08em}.heart{font-size:38px;margin:2px 0 12px;color:#d98f98}.intro{text-align:center;align-items:center;justify-content:center}.intro .sub{max-width:420px}.intro h1{max-width:470px}.intro .date{align-self:center}.intro .actions{justify-content:center}.summary{width:100%;display:grid;gap:12px;margin:18px 0}.answer{background:#fff8f7;border:1px solid #f2e4e3;border-radius:14px;padding:13px 15px;text-align:left}.answer strong{display:block;font-size:13px;color:#986d73;margin-bottom:5px}.answer span{font-size:14px;line-height:1.5;color:#65575a;white-space:pre-wrap;overflow-wrap:anywhere}.footer{text-align:center;color:#b49fa1;font-size:11px;margin-top:17px;letter-spacing:.08em}
+  @media(max-width:520px){body{padding:14px}.card{min-height:560px;border-radius:23px}.actions{margin-top:18px}.btn{padding:12px 18px}.message{margin-top:10px}}
+</style>
+</head>
+<body>
+<div class="sparkle s1">✦</div><div class="sparkle s2">♡</div><div class="sparkle s3">✧</div><div class="sparkle s4">♡</div>
+<main class="wrap">
+  <div class="topline">a little letter for you</div>
+  <section class="card" aria-live="polite">
+    <div class="content" id="content"></div>
+    <div class="actions" id="actions"></div>
+  </section>
+  <div class="footer">MADE WITH A LITTLE WARMTH · 11 APRIL</div>
+</main>
+<script>
+const messages = [
+  {text:"Halo, apa kabar?", hint:"Semoga kamu selalu dalam keadaan baik, ya."},
+  {text:"Cieee, yang hari ini ulang tahun!", hint:"Akhirnya hari spesialmu datang juga. Selamat bertambah usia, Difani! ♡"},
+  {text:"Semoga panjang umur, ya.", hint:"Semoga selalu diberi kesehatan, kebahagiaan, dan banyak hal baik di setiap langkahmu."},
+  {text:"Semangat ya sama profesiannya.", hint:"Semoga semua yang sedang kamu kerjakan berjalan lancar. Tetap semangat mengejar hal-hal yang kamu impikan!"},
+  {text:"Semoga kesehatanmu baik-baik aja, ya.", hint:"Jaga diri baik-baik. Semoga kamu selalu diberi kesehatan dan semakin kuat menjalani hari-hari."},
+  {text:"Jangan keseringan begadang, aku tahu pasti kamu masih sering begadang, kan?", hint:"Jangan lupa istirahat yang cukup, ya. Kesehatanmu juga penting."},
+  {text:"Semoga sesuatu yang baik selalu menghampirimu, ya.", hint:"Semoga banyak kesempatan baik, kebahagiaan, dan orang-orang tulus datang ke dalam hidupmu."},
+  {text:"Semoga harimu menyenangkan selalu, ya. Dan sering-seringlah tersenyum.", hint:"Semoga hari-harimu ke depan dipenuhi hal-hal baik. Tetap jadi Difani yang penuh senyum. Selamat ulang tahun! ♡"}
+];
+let current = -1;
+const content = document.getElementById('content');
+const actions = document.getElementById('actions');
+function renderIntro(){
+ content.className='content intro';
+ content.innerHTML=`<div class="heart">♡</div><div class="eyebrow">11 april · your special day</div><h1>Hey, Difani!</h1><p class="sub">Ada beberapa pesan kecil yang ingin disampaikan khusus untukmu. Nggak perlu buru-buru, nikmati setiap pesannya, ya.</p><div class="date">✿ &nbsp; 11 April &nbsp; ✿</div>`;
+ actions.innerHTML=`<button class="btn primary" id="start">Buka surat kecil ini&nbsp; →</button>`;
+ document.getElementById('start').onclick=()=>{current=0;renderMessage()};
+}
+function renderMessage(){
+ const m=messages[current];
+ content.className='content';
+ content.innerHTML=`<div class="progress"><div class="bar" style="width:${((current+1)/messages.length)*100}%"></div></div><div class="eyebrow">a birthday note · ${String(current+1).padStart(2,'0')} / ${messages.length}</div><div class="message">${m.text}</div><p class="sub">${m.hint}</p>`;
+ actions.innerHTML=`<button class="btn secondary" id="back">← Kembali</button><button class="btn primary" id="next">${current===messages.length-1?'Selesai ♡':'Next →'}</button>`;
+ document.getElementById('back').onclick=()=>{if(current===0)renderIntro();else{current--;renderMessage()}};
+ document.getElementById('next').onclick=()=>{if(current===messages.length-1)renderThankYou();else{current++;renderMessage()}};
+}
+function renderThankYou(){
+ content.className='content intro';
+ content.innerHTML=`<div class="heart">♡</div><div class="eyebrow">a little letter for you</div><h1>Happy Birthday, Difani!</h1><p class="sub">Terima kasih sudah membaca pesan kecil ini sampai selesai. Semoga tahun barumu dipenuhi kebahagiaan, kesehatan, dan hal-hal baik. Jangan lupa bahagia dan sering-sering tersenyum, ya. ♡</p><div class="date">✿ &nbsp; with warmth, 11 April &nbsp; ✿</div>`;
+ actions.innerHTML=`<button class="btn primary" id="restart">Baca lagi ♡</button>`;
+ document.getElementById('restart').onclick=()=>{current=-1;renderIntro()};
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+renderIntro();
+</script>
+</body>
+</html>
